@@ -1,3 +1,4 @@
+using System.Reflection;
 using ProductService.Api;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +11,17 @@ app.Run();
 static void ConfigureServices(IServiceCollection services)
 {
     services.AddSingleton<ProductRepository>();
+    services.AddSwaggerGen(config =>
+    {
+        var xmlFile = $"{Assembly.GetEntryAssembly()?.GetName().Name}.xml";
+        var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+
+        var xmlDocExists = File.Exists(xmlPath);
+        if (xmlDocExists)
+        {
+            config.IncludeXmlComments(xmlPath);
+        }
+    });
 
     var mvcBuilder = services.AddControllers();
     mvcBuilder.AddControllersAsServices();
@@ -18,6 +30,15 @@ static void ConfigureServices(IServiceCollection services)
 static void ConfigureApp(WebApplication app)
 {
     app.MapControllers();
+    if (app.Environment.IsDevelopment())
+    {
+        app.UseSwagger();
+        app.UseSwaggerUI(options =>
+        {
+            options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
+            options.RoutePrefix = string.Empty;
+        });
+    }
 }
 
 /// <summary>

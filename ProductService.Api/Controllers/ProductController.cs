@@ -37,7 +37,7 @@ public class ProductController : ControllerBase
         return CreatedAtAction(nameof(Get), product.Name, product);
     }
 
-    [HttpPost]
+    [HttpPut]
     public IActionResult UpdateProduct([FromBody] Product product)
     {
         if (!_repository.Products.TryGetValue(product.Name, out _))
