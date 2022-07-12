@@ -1,7 +1,6 @@
 using System.Reflection;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
-using ProductService.Api;
 using ProductService.Api.Settings;
 using ProductService.Dal;
 
@@ -17,7 +16,6 @@ static void ConfigureServices(IServiceCollection services, IConfiguration config
     services.AddOptions<ProductServiceSettings>()
         .Bind(configuration.GetRequiredSection(nameof(ProductServiceSettings)))
         .ValidateDataAnnotations();
-    services.AddSingleton<ProductRepository>();
     services.AddSwaggerGen(config =>
     {
         var xmlFile = $"{Assembly.GetEntryAssembly()?.GetName().Name}.xml";
