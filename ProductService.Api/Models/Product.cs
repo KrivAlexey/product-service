@@ -8,6 +8,21 @@ namespace ProductService.Api.Models;
 public record Product
 {
     /// <summary>
+    /// Constructor
+    /// </summary>
+    /// <param name="name"></param>
+    /// <param name="description"></param>
+    /// <param name="price"></param>
+    /// <param name="currency"></param>
+    public Product(string name, string? description, decimal price, string currency)
+    {
+        Name = name;
+        Description = description;
+        Price = price;
+        Currency = currency;
+    }
+
+    /// <summary>
     /// Name
     /// </summary>
     [Required(AllowEmptyStrings = false)]

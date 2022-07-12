@@ -31,7 +31,7 @@ static void ConfigureServices(IServiceCollection services, IConfiguration config
     services.AddDbContextPool<ProductDbContext>((provider, builder) =>
     {
         var options = provider.GetRequiredService<IOptions<ProductServiceSettings>>();
-        builder.UseNpgsql(options.Value.ProductsDB).UseSnakeCaseNamingConvention();
+        builder.UseNpgsql(options.Value.ProductsDb!).UseSnakeCaseNamingConvention();
     });
 
     var mvcBuilder = services.AddControllers();

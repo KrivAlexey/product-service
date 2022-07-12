@@ -14,7 +14,7 @@ public class Product
     /// </summary>
     [Required(AllowEmptyStrings = false)]
     [MaxLength(100)]
-    public string Name { get; set; }
+    public string? Name { get; set; }
     
     /// <summary>
     /// Description
@@ -34,7 +34,7 @@ public class Product
     [Required]
     [MinLength(3)]
     [MaxLength(3)]
-    public string Currency { get; set; }
+    public string? Currency { get; set; }
     
     [Required]
     public DateTimeOffset CreatedOn { get; set; }

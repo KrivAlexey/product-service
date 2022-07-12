@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+// ReSharper disable UnusedAutoPropertyAccessor.Global
 
 namespace ProductService.Api.Settings;
 
@@ -11,5 +12,5 @@ public class ProductServiceSettings
     /// Db connection string
     /// </summary>
     [Required]
-    public string? ProductsDB { get; set; }
+    public string? ProductsDb { get; set; }
 }

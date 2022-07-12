@@ -13,12 +13,12 @@ public static class Mapping
     public static Product ToApi(this Dal.Product product)
     {
         return new Product
-        {
-            Name = product.Name, 
-            Description = product.Description,
-            Price = product.Price,
-            Currency = product.Currency
-        };
+        (
+            product.Name!, 
+            product.Description,
+            product.Price,
+            product.Currency!
+        );
     }
 
     /// <summary>
