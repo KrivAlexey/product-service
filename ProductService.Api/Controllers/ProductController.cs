@@ -1,7 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Net.Mime;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using ProductService.Api.Models;
+using ProductService.Api.Settings;
 
 namespace ProductService.Api.Controllers;
 
@@ -21,7 +23,7 @@ public class ProductController : ControllerBase
     /// Constructor
     /// </summary>
     /// <param name="repository">Repository of products</param>
-    public ProductController(ProductRepository repository)
+    public ProductController(ProductRepository repository, IOptions<ProductServiceSettings> options)
     {
         _repository = repository;
     }

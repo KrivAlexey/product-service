@@ -1,15 +1,22 @@
 using System.Reflection;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using ProductService.Api;
+using ProductService.Api.Settings;
+using ProductService.Dal;
 
 var builder = WebApplication.CreateBuilder(args);
-ConfigureServices(builder.Services);
+ConfigureServices(builder.Services, builder.Configuration);
 
 var app = builder.Build();
 ConfigureApp(app);
 app.Run();
 
-static void ConfigureServices(IServiceCollection services)
+static void ConfigureServices(IServiceCollection services, IConfiguration configuration)
 {
+    services.AddOptions<ProductServiceSettings>()
+        .Bind(configuration.GetRequiredSection(nameof(ProductServiceSettings)))
+        .ValidateDataAnnotations();
     services.AddSingleton<ProductRepository>();
     services.AddSwaggerGen(config =>
     {
@@ -21,6 +28,12 @@ static void ConfigureServices(IServiceCollection services)
         {
             config.IncludeXmlComments(xmlPath);
         }
+    });
+
+    services.AddDbContextPool<ProductDbContext>((provider, builder) =>
+    {
+        var options = provider.GetRequiredService<IOptions<ProductServiceSettings>>();
+        builder.UseNpgsql(options.Value.ProductsDB).UseSnakeCaseNamingConvention();
     });
 
     var mvcBuilder = services.AddControllers();
