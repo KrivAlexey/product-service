@@ -37,7 +37,7 @@ public class Product
     public string Currency { get; set; }
     
     [Required]
-    private DateTimeOffset CreatedOn { get; set; }
+    public DateTimeOffset CreatedOn { get; set; }
     
-    private DateTimeOffset? RemovedOn { get; set; }
+    public DateTimeOffset? RemovedOn { get; set; }
 }

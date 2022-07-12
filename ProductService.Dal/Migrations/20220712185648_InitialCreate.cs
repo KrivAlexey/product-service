@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
@@ -18,7 +19,9 @@ namespace ProductService.Dal.Migrations
                     name = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
                     description = table.Column<string>(type: "character varying(1000)", maxLength: 1000, nullable: true),
                     price = table.Column<decimal>(type: "numeric", nullable: false),
-                    currency = table.Column<string>(type: "character varying(3)", maxLength: 3, nullable: false)
+                    currency = table.Column<string>(type: "character varying(3)", maxLength: 3, nullable: false),
+                    created_on = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
+                    removed_on = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true)
                 },
                 constraints: table =>
                 {
