@@ -149,6 +149,7 @@ public class ProductController : ControllerBase
         }
 
         dbProduct.RemovedOn = DateTimeOffset.UtcNow;
+        await _dbContext.SaveChangesAsync(token);
         return NoContent();
     }
 }

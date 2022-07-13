@@ -55,4 +55,6 @@ static void ConfigureApp(WebApplication app)
 /// <summary>
 ///  Entry point for the  WebApplicationFactory
 /// </summary>
-public partial class Program { }
+public partial class Program
+{
+}

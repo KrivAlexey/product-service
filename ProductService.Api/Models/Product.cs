@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace ProductService.Api.Models;
 
@@ -27,19 +28,19 @@ public record Product
     /// </summary>
     [Required(AllowEmptyStrings = false)]
     [MaxLength(100)]
-    public string Name { get; init; }
+    public string Name { get; }
     
     /// <summary>
     /// Description
     /// </summary>
     [MaxLength(1000)]
-    public string? Description { get; init; }
+    public string? Description { get; }
     
     /// <summary>
     /// Price
     /// </summary>
     [Required]
-    public decimal Price { get; init; }
+    public decimal Price { get; }
     
     /// <summary>
     /// Currency
@@ -47,5 +48,5 @@ public record Product
     [Required]
     [MinLength(3)]
     [MaxLength(3)]
-    public string Currency { get; init; }
+    public string Currency { get; }
 }
